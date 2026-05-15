@@ -13,10 +13,10 @@ Cuando un flujo de n8n crece demasiado se convierte en un “spaghetti” difíc
 
 **Conceptos clave antes de comenzar.**
 
-    - **Flujo padre:** El workflow principal que llama a otros.
-    - **Subflujo:** Un workflow independiente que realiza una tarea específica y es invocado desde otro flujo.
-    - **Nodo "Execute Workflow":** Se coloca en el flujo padre para llamar a un subflujo.
-    - **Nodo "Execute Workflow Trigger":** Es el único nodo que puede iniciar un subflujo. Recibe los datos enviados por el padre y es la puerta de entrada del subflujo.
+    - Flujo padre: El workflow principal que llama a otros.
+    - Subflujo: Un workflow independiente que realiza una tarea específica y es invocado desde otro flujo.
+    - Nodo "Execute Workflow": Se coloca en el flujo padre para llamar a un subflujo.
+    - Nodo "Execute Workflow Trigger": Es el único nodo que puede iniciar un subflujo. Recibe los datos enviados por el padre y es la puerta de entrada del subflujo.
 
 **Regla de oro:** Los disparadores (triggers) como Webhook, Schedule, Interval, etc. NUNCA pueden estar dentro de un subflujo. Siempre deben residir en el flujo principal.
 
@@ -54,7 +54,9 @@ Este método mueve un grupo de nodos seleccionados a un nuevo flujo y los sustit
 n8n automáticamente.
 ![subflujo](images/Instruccion3.jpeg)
     - Crea un nuevo flujo con esos nodos, encabezados por un nodo Execute Workflow Trigger.
-![flujo nuevo](images/Instruccion4.jpeg)   ![Texto alternativo](images/Instruccion4.1.jpeg)
+![flujo nuevo](images/Instruccion4.jpeg)   
+    - Selecciona Execute A Sub Workflow.
+![Texto alternativo](images/Instruccion4.1.jpeg)
     - En el flujo original, reemplaza los nodos seleccionados por un nodo "Execute Workflow" ya configurado para llamar al nuevo subflujo.
 ![flujo original](images/Instruccion5.jpeg)
 Ya tienes tu flujo dividido. Puedes renombrar ambos flujos para identificarlos mejor.
@@ -62,9 +64,9 @@ Ya tienes tu flujo dividido. Puedes renombrar ambos flujos para identificarlos m
 
 **Paso de datos entre flujos**
 
-    - **Del padre al subflujo:** En el nodo Execute Workflow del padre, configura el campo Input. Lo que pongas ahí será recibido por el Execute Workflow Trigger del subflujo.
-    - **Dentro del subflujo:** Los datos del padre están disponibles con la expresión {{ $input.first().json }} (para el primer ítem). Puedes trabajar con ellos normalmente.
-    - **Del subflujo al padre:** La salida del último nodo del subflujo es devuelta automáticamente al flujo padre. En el padre, el nodo que sigue al Execute Workflow recibe ese resultado en {{ $json }}.
+    - Del padre al subflujo: En el nodo Execute Workflow del padre, configura el campo Input. Lo que pongas ahí será recibido por el Execute Workflow Trigger del subflujo.
+    - Dentro del subflujo: Los datos del padre están disponibles con la expresión {{ $input.first().json }} (para el primer ítem). Puedes trabajar con ellos normalmente.
+    - Del subflujo al padre: La salida del último nodo del subflujo es devuelta automáticamente al flujo padre. En el padre, el nodo que sigue al Execute Workflow recibe ese resultado en {{ $json }}.
 
 **Modos de ejecución: Síncrono vs Asíncrono.**
 
