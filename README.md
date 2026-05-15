@@ -38,9 +38,11 @@ Cuando un flujo de n8n crece demasiado se convierte en un “spaghetti” difíc
     Webhook, Schedule, Interval, Email Trigger (IMAP), RabbitMQ Trigger, etc.
     - Un segundo Execute Workflow Trigger. Un subflujo solo puede tener uno, y debe ser el primer nodo.
     - Nodos que dependen exclusivamente de datos estáticos del flujo padre 
-    (ej. variables de entorno propias del flujo) estos datos deben pasarse explícitamente como parámetros desde el padre.
+    (ej. variables de entorno propias del flujo) estos datos deben pasarse explícitamente como parámetros 
+    desde el padre.
     - Un subflujo siempre es invocado, nunca arranca por sí solo. Por eso no admite triggers propios. 
-    Si necesitas una entrada externa (por ejemplo un webhook), el flujo padre debe recibirla y luego llamar al subflujo.
+    Si necesitas una entrada externa (por ejemplo un webhook), el flujo padre debe recibirla y luego 
+    llamar al subflujo.
 
 **Conversión automática a subflujos**
 
