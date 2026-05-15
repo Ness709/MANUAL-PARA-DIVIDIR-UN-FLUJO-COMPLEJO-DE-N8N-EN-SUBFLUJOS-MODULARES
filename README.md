@@ -64,6 +64,7 @@ Este método mueve un grupo de nodos seleccionados a un nuevo flujo y los sustit
 ![subflujo](images/Instruccion3.jpeg)
 
     - Crea un nuevo flujo con esos nodos, encabezados por un nodo Execute Workflow Trigger.
+    Nota: lo puedes buscarlo en tu workflows
 
 ![flujo nuevo](images/Instruccion4.jpeg)  
 
