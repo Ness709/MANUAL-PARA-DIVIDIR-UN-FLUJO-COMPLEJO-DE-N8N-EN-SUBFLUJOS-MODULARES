@@ -45,31 +45,17 @@ Este método mueve un grupo de nodos seleccionados a un nuevo flujo y los sustit
 Paso a paso
 
     - Abre el flujo "spaghetti" en el editor de n8n.
+![Texto alternativo](ruta/de/la/imagen.png)
     - Selecciona los nodos que realizan una tarea concreta y que puedas aislar completamente (no deben recibir entradas desde nodos de fuera de la selección ni enviar salidas a nodos externos).
+![Texto alternativo](ruta/de/la/imagen.png)
     - Haz clic derecho sobre la selección y elige "Convert to sub-workflow" (también puedes usar el atajo Alt+X en Windows).
-n8n automáticamente:
+n8n automáticamente.
+![Texto alternativo](ruta/de/la/imagen.png)
     - Crea un nuevo flujo con esos nodos, encabezados por un nodo Execute Workflow Trigger.
+![Texto alternativo](ruta/de/la/imagen.png)
     - En el flujo original, reemplaza los nodos seleccionados por un nodo "Execute Workflow" ya configurado para llamar al nuevo subflujo.
+![Texto alternativo](ruta/de/la/imagen.png)
 Ya tienes tu flujo dividido. Puedes renombrar ambos flujos para identificarlos mejor.
-
-Creación manual de subflujos (recomendado para flujos muy ramificados).
-
-Cuando la conversión automática falla o necesitas control total sobre las conexiones, este método nunca falla.
-
-Paso a paso
-
-- Identifica un bloque lógico en tu flujo principal. Busca una sección que haga una tarea completa y que puedas considerar como una "caja negra" con una entrada y una salida.
-- Copia esos nodos (seleccionar, click derecho > Copy or Ctrl+C). Después elimínalos del flujo principal.
-- Crea un nuevo workflow vacío.
-    1. Asignarle un nombre descriptivo, por ejemplo: [SUB] Validar Pedido.
-    2. El primer nodo debe ser un "Execute Workflow Trigger" (búscalo en el panel de nodos).
-    3. Pega los nodos copiados y conectalos a la salida del Execute Workflow Trigger.
-- Vuelve al flujo principal y coloca un nodo "Execute Workflow" exactamente donde estaban los nodos que quitaste.
-- Configura el nodo "Execute Workflow":
-    1. En el campo Workflow, selecciona el subflujo que acabas de crear.
-    2. En Input, indica los datos que le quieres pasar. Por defecto puedes usar {{ $json }} para enviar los datos completos del nodo anterior.
-- Conecta la entrada del Execute Workflow al nodo que alimentaba el bloque que eliminaste, y su salida al nodo que venía después.
-- Repite el proceso con el resto de bloques lógicos que quieras separar.
 
 Paso de datos entre flujos
 
