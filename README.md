@@ -44,22 +44,34 @@ Cuando un flujo de n8n crece demasiado se convierte en un “spaghetti” difíc
 Este método mueve un grupo de nodos seleccionados a un nuevo flujo y los sustituye por un nodo Execute Workflow que los invoca. Es rápido pero solo funciona si los nodos seleccionados forman un bloque cerrado, sin conexiones externas de entrada o salida.
 
 **Paso a paso**
-
     - Abre el flujo "spaghetti" en el editor de n8n.
+
 ![spaquetti](images/Instruccion1.jpeg)
+
     - Selecciona los nodos que realizan una tarea concreta y que puedas aislar completamente
     (no deben recibir entradas desde nodos de fuera de la selección ni enviar salidas a nodos externos).
+
 ![seleccion](images/Instruccion2.jpeg)
+
     - Haz clic derecho sobre la selección y elige "Convert to sub-workflow" (también puedes usar el atajo Alt+X en Windows).
 n8n automáticamente.
+
 ![subflujo](images/Instruccion3.jpeg)
+
     - Crea un nuevo flujo con esos nodos, encabezados por un nodo Execute Workflow Trigger.
-![flujo nuevo](images/Instruccion4.jpeg)   
+
+![flujo nuevo](images/Instruccion4.jpeg)  
+
     - Selecciona Execute A Sub Workflow.
+
 ![Texto alternativo](images/Instruccion4.1.jpeg)
+
     - En el flujo original, reemplaza los nodos seleccionados por un nodo "Execute Workflow" ya configurado para llamar al nuevo subflujo.
+
 ![flujo original](images/Instruccion5.jpeg)
-Ya tienes tu flujo dividido. Puedes renombrar ambos flujos para identificarlos mejor.
+
+    Ya tienes tu flujo dividido. Puedes renombrar ambos flujos para identificarlos mejor.
+    
 ![flujo listo](images/Instruccion6.jpeg)
 
 **Paso de datos entre flujos**
@@ -71,5 +83,7 @@ Ya tienes tu flujo dividido. Puedes renombrar ambos flujos para identificarlos m
 **Modos de ejecución: Síncrono vs Asíncrono.**
 
 En el nodo Execute Workflow puedes decidir si el flujo padre espera o no a que el subflujo termine.
-    - **Síncrono (por defecto):** El padre se pausa hasta que el subflujo acaba y recibe los resultados. Ideal cuando necesitas esos datos para continuar.
-    - **Asíncrono (no esperar):** Desmarca la opción "Wait for Sub-Workflow Completion". El padre lanza el subflujo y sigue avanzando inmediatamente. Esto acelera procesos masivos (ejemplo: enviar cientos de notificaciones) pero el padre no recibe automáticamente los resultados. Si los necesitas, puedes hacer que el subflujo notifique por otra vía (webhook, actualización en base de datos, etc.).
+
+    - Síncrono (por defecto): El padre se pausa hasta que el subflujo acaba y recibe los resultados. Ideal cuando necesitas esos datos para continuar.
+
+    - Asíncrono (no esperar): Desmarca la opción "Wait for Sub-Workflow Completion". El padre lanza el subflujo y sigue avanzando inmediatamente. Esto acelera procesos masivos (ejemplo: enviar cientos de notificaciones) pero el padre no recibe automáticamente los resultados. Si los necesitas, puedes hacer que el subflujo notifique por otra vía (webhook, actualización en base de datos, etc.).
